@@ -5,7 +5,6 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
     "emitDecoratorMetadata": false,
     "esModuleInterop": true,
     "experimentalDecorators": false,
@@ -13,9 +12,10 @@
     "importHelpers": true,
     "incremental": true,
     "isolatedModules": true,
-    "lib": ["es2022"],
+    "lib": ["es2022", "dom", "dom.iterable"], // Add "dom" and "dom.iterable" for Next.js
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "noEmit": true, // Keep this option
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -23,12 +23,28 @@
     "noUnusedLocals": true,
     "pretty": true,
     "removeComments": false,
-    "resolveJsonModule": false,
+    "resolveJsonModule": true, // Enable JSON module resolution
     "skipDefaultLibCheck": false,
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
     "target": "es2022",
-    "verbatimModuleSyntax": false
-  }
+    "verbatimModuleSyntax": false,
+    "baseUrl": ".", // Add baseUrl for path resolution
+    "paths": {
+      "@/*": ["apps/frontend/src/*"] // Add path aliases
+    }
+  },
+  "include": [
+    "**/*", // Include all files in the workspace
+    ".next/types/**/*" // Include Next.js generated types
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "out-tsc",
+    "jest.config.ts",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

@@ -54,5 +54,12 @@
         "linter": "none"
       }
     }
+  },
+  "projects": {
+    "frontend": "apps/frontend"
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
   }
 }
