@@ -2,29 +2,36 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "noEmit": true, // Ensure this matches tsconfig.base.json
-    "outDir": "out-tsc/frontend",
-    "rootDir": "src",
-    "tsBuildInfoFile": "out-tsc/frontend/tsconfig.tsbuildinfo",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
+    ],
+    "types": [
+      "node"
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.js",
-    "src/**/*.jsx",
-    ".next/types/**/*.ts", // Include Next.js generated types
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "../../apps/frontend/.next/types/**/*.ts",
+    "../../dist/apps/frontend/.next/types/**/*.ts",
     "next-env.d.ts",
-    "../../dist/apps/frontend/.next/types/**/*.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "out-tsc",
-    "dist",
     "jest.config.ts",
     "src/**/*.spec.ts",
     "src/**/*.test.ts"
