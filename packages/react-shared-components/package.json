@@ -1,0 +1,22 @@
+{
+    "name": "@nx-starterkit/react-shared-components",
+    "version": "1.0.0",
+    "description": "A library of shared React components",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+      "publish": "npm publish"
+    },
+    "keywords": [
+      "react",
+      "components",
+      "shared"
+    ],
+    "author": "Shaxzad",
+    "license": "MIT",
+    "publishConfig": {
+      "access": "public"
+    }
+  }
+  

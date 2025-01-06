@@ -1,3 +1,4 @@
+import { Button } from '@nx-starterkit/react-shared-components';
 
 
 
@@ -9,7 +10,7 @@ export default function Index() {
    */
   return (
     <div>
-      
+      <Button label="Click me" onClick={() => alert('Hello!')} />
       
     <div className="wrapper">
       <div className="container">

@@ -46,6 +46,12 @@
       "options": {
         "targetName": "eslint:lint"
       }
+    },
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "build"
+      }
     }
   ],
   "generators": {
@@ -53,6 +59,11 @@
       "application": {
         "style": "tailwind",
         "linter": "none"
+      }
+    },
+    "@nx/react": {
+      "library": {
+        "unitTestRunner": "none"
       }
     }
   },
@@ -67,7 +78,10 @@
     "lint": {
       "executor": "@nx/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/frontend/**/*.ts", "library/shared-components/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/frontend/**/*.ts",
+          "library/react-shared-components/**/*.ts"
+        ]
       }
     }
   },
