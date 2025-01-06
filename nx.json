@@ -68,11 +68,18 @@
     }
   },
   "projects": {
-    "frontend": "apps/frontend"
+    "frontend": {
+      "root": "apps/frontend",
+      "tsConfig": "apps/frontend/tsconfig.json"
+    },
+    "react-shared-components": {
+      "root": "packages/react-shared-components",
+      "tsConfig": "packages/react-shared-components/tsconfig.json"
+    }
   },
   "workspaceLayout": {
     "appsDir": "apps",
-    "libsDir": "libs"
+    "libsDir": "packages"
   },
   "targets": {
     "lint": {

@@ -1,5 +1,5 @@
 {
-  "name": "@my-project/source",
+  "name": "@nx-starterkit/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
