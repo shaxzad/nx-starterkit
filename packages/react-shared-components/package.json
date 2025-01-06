@@ -1,6 +1,6 @@
 {
     "name": "@nx-starterkit/react-shared-components",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "description": "A library of shared React components",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
