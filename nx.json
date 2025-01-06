@@ -98,5 +98,9 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
+  },
+  "sync": {
+    "disabledTaskSyncGenerators": ["@nx/js:typescript-sync"]
   }
+  
 }
