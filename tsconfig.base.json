@@ -36,7 +36,7 @@
       "@nx-starterkit/react-shared-components": [
         "packages/react-shared-components/src/index.ts"
       ]
-    },
+    }
   },
   "include": ["**/*", ".next/types/**/*"],
   "exclude": [
