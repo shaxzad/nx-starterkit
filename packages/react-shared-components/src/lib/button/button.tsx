@@ -1,11 +1,6 @@
-import React from 'react';
-import './button.module.css';
+import './../../../tailwind.css';
 
-export interface ButtonProps {
-  label: string;
-  onClick: () => void;
-}
-
-export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
-  return <button>Click me</button>;
+export const Button = () => {
+  return <button className="bg-blue-500 text-white py-2 px-4 rounded">Click here </button>;
 };
+
