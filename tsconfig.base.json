@@ -12,10 +12,10 @@
     "importHelpers": true,
     "incremental": true,
     "isolatedModules": true,
-    "lib": ["es2022", "dom", "dom.iterable"], // Add "dom" and "dom.iterable" for Next.js
+    "lib": ["es2022", "dom", "dom.iterable"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "noEmit": true, // Keep this option
+    "noEmit": true,
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -23,22 +23,20 @@
     "noUnusedLocals": true,
     "pretty": true,
     "removeComments": false,
-    "resolveJsonModule": true, // Enable JSON module resolution
+    "resolveJsonModule": true,
     "skipDefaultLibCheck": false,
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
     "target": "es2022",
     "verbatimModuleSyntax": false,
-    "baseUrl": ".", // Add baseUrl for path resolution
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["apps/frontend/src/*"] // Add path aliases
+      "@/*": ["apps/frontend/src/*"],
+      "@my-project/shared-components": ["library/shared-components/src/index.ts"]
     }
   },
-  "include": [
-    "**/*", // Include all files in the workspace
-    ".next/types/**/*" // Include Next.js generated types
-  ],
+  "include": ["**/*", ".next/types/**/*"],
   "exclude": [
     "node_modules",
     "dist",
