@@ -1,0 +1,9 @@
+{
+  "name": "@nx-starterkit/nestjs-lib",
+  "version": "1.0.0",
+  "main": "./dist/packages/nestjs-lib/index.js",
+  "types": "./dist/packages/nestjs-lib/index.d.ts",
+  "scripts": {
+    "build": "nx build nestjs-lib"
+  }
+}

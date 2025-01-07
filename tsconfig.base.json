@@ -1,50 +1,31 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "emitDecoratorMetadata": false,
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "noPropertyAccessFromIndexSignature": false,
     "esModuleInterop": true,
-    "experimentalDecorators": false,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "incremental": true,
-    "isolatedModules": true,
-    "lib": ["es2022", "dom", "dom.iterable"],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "noEmit": true,
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "pretty": true,
-    "removeComments": false,
-    "resolveJsonModule": true,
-    "skipDefaultLibCheck": false,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "sourceMap": false,
-    "strict": true,
-    "target": "es2022",
-    "verbatimModuleSyntax": false,
+    "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["apps/frontend/src/*"],
+      "@nx-starterkit/nestjs-lib": ["dist/packages/nestjs-lib/src/index.js"],
       "@nx-starterkit/react-shared-components": [
-        "packages/react-shared-components/src/index.ts"
-      ]
+        "packages/react-shared-components/*"
+      ],
     }
   },
-  "include": ["**/*", ".next/types/**/*"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "out-tsc",
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

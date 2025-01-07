@@ -84,6 +84,10 @@
     "react-shared-components": {
       "root": "packages/react-shared-components",
       "tsConfig": "packages/react-shared-components/tsconfig.json"
+    },
+    "nestjs-lib": {
+      "root": "packages/nestjs-lib",
+      "tsConfig": "packages/nestjs-lib/tsconfig.lib.json"
     }
   },
   "workspaceLayout": {
@@ -96,7 +100,8 @@
       "options": {
         "lintFilePatterns": [
           "apps/frontend/**/*.ts",
-          "library/react-shared-components/**/*.ts"
+          "packages/react-shared-components/**/*.ts",
+          "packages/nestjs-lib/**/*.ts"
         ]
       }
     }

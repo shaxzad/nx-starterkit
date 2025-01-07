@@ -1,12 +1,14 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
-    "types": ["node", "multer"],
-    "emitDecoratorMetadata": true,
-    "target": "es2021"
+    "outDir": "../../dist/packages/nestjs-lib",
+    "module": "commonjs", // Use "commonjs" instead of "NodeNext"
+    "moduleResolution": "node", // Use "node" instead of "NodeNext"
+    "experimentalDecorators": true, // Add this
+    "emitDecoratorMetadata": true, // Add this
+    "target": "es2017",
+    "types": ["node"]
   },
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }
