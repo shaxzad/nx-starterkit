@@ -39,7 +39,8 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      }
+      },
+      "exclude": ["backend-e2e/**/*", "apps/backend-e2e/**/*"]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -51,6 +52,14 @@
       "plugin": "@nx/rollup/plugin",
       "options": {
         "buildTargetName": "build"
+      }
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
       }
     }
   ],
@@ -102,5 +111,4 @@
   "sync": {
     "disabledTaskSyncGenerators": ["@nx/js:typescript-sync"]
   }
-  
 }
