@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "nx serve frontend",
-    "build": "nx build frontend",
-    "lint": "nx lint frontend",
+    "dev": "npx nx run-many --target=serve --projects=frontend,backend --parallel=2",
+    "frontend": "nx serve frontend",
+    "backend": "nx serve backend",
+    "build": "nx affected -t build",
+    "lint": "nx affected -t build",
     "test": "nx test frontend"
   },
   "private": true,
