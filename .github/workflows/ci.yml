@@ -25,4 +25,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx affected -t lint build --no-cache
+      - run: |
+          unset NX_BASE
+          unset NX_HEAD
+          npx nx affected -t lint build --skip-nx-cache
