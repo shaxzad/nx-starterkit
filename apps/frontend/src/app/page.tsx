@@ -1,7 +1,5 @@
 import { Button } from '@nx-starterkit/react-shared-components';
 
-
-
 export default function Index() {
   /*
    * Replace the elements below with your own.
@@ -10,7 +8,7 @@ export default function Index() {
    */
   return (
     <div>
-      <Button/>
+      <Button />
     </div>
   );
-};
+}

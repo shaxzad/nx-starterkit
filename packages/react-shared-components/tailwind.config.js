@@ -7,4 +7,3 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}', // Add paths specific to this package
   ],
 };
-  

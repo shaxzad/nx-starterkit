@@ -5,12 +5,12 @@
     "module": "commonjs",
     "types": ["jest", "node"],
     "experimentalDecorators": true, // Required for decorators
-    "emitDecoratorMetadata": true,  // Required for metadata
-    "target": "es2017",             // Use a modern target
-    "moduleResolution": "node",     // Use Node.js module resolution
-    "strict": true,                 // Enable strict type checking
-    "noImplicitAny": true,          // Disallow implicit `any` types
-    "esModuleInterop": true         // Enable ES module interop
+    "emitDecoratorMetadata": true, // Required for metadata
+    "target": "es2017", // Use a modern target
+    "moduleResolution": "node", // Use Node.js module resolution
+    "strict": true, // Enable strict type checking
+    "noImplicitAny": true, // Disallow implicit `any` types
+    "esModuleInterop": true // Enable ES module interop
   },
   "include": [
     "jest.config.ts",

@@ -1,9 +1,9 @@
 {
-    "extends": "./tsconfig.base.json",
-    "compilerOptions": {
-      "paths": {
-        "@app/*": ["apps/*"],
-        "@packages/*": ["packages/*"]
-      }
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@app/*": ["apps/*"],
+      "@packages/*": ["packages/*"]
     }
   }
+}
