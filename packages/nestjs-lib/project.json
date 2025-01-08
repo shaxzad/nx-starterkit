@@ -9,14 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/nestjs-lib",
-        "main": "packages/nestjs-lib/src/index.ts",
         "tsConfig": "packages/nestjs-lib/tsconfig.lib.json",
-        "assets": ["packages/nestjs-lib/*.md"]
+        "packageJson": "packages/nestjs-lib/package.json",
+        "main": "packages/nestjs-lib/src/index.ts",
+        "assets": ["packages/nestjs-lib/*.md"],
+        "updateBuildableProjectDepsInPackageJson": true
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
   }
 }
