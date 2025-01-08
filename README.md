@@ -10,13 +10,17 @@
 
 [Click here to finish setting up your workspace!](https://cloud.nx.app/connect/VrHWV7zxhH)
 
-## Generate a library
+## APPs 
 
 ```sh
 nx serve frontend
 ```
 
-## Run tasks
+```sh
+nx serve backend
+```
+
+## Build packages
 
 To build the library use:
 
@@ -24,13 +28,10 @@ To build the library use:
 nx build react-shared-components
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+```sh
+nx build nestjs-lib
+```
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
 
 ```
 npx nx release
