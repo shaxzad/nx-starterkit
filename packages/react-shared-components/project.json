@@ -2,8 +2,24 @@
   "name": "react-shared-components",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/react-shared-components/react-shared-components/src",
-  "projectType": "library",
+  "projectType": "package",
   "tags": [],
-  "// targets": "to see all targets run: nx show project react-shared-components --web",
-  "targets": {}
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/react-shared-components",
+        "tsConfig": "packages/react-shared-components/tsconfig.lib.json",
+        "packageJson": "packages/react-shared-components/package.json",
+        "main": "packages/react-shared-components/src/index.ts",
+        "assets": ["packages/react-shared-components/*.md"],
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
 }

@@ -23,7 +23,7 @@
       "@/*": ["apps/frontend/src/*"],
       "@nx-starterkit/nestjs-lib": ["packages/nestjs-lib/src/index.ts"],
       "@nx-starterkit/react-shared-components": [
-        "packages/react-shared-components/*"
+        "packages/react-shared-components/src/index.ts"
       ]
     }
   },
