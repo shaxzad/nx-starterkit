@@ -2,11 +2,9 @@ name: CI
 on:
   push:
     branches:
-      # Change this if your primary branch is not main
       - main
   pull_request:
 
-# Needed for nx-set-shas when run on the main branch
 permissions:
   actions: read
   contents: read
@@ -22,11 +20,9 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      # This line enables distribution
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
-      # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
+
       - run: npm ci
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx affected -t lint build
+      - run: npx nx affected -t lint build --no-cache
