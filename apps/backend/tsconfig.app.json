@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/packages/nestjs-lib",
+    "module": "commonjs", // Use "commonjs" instead of "NodeNext"
+    "moduleResolution": "node", // Use "node" instead of "NodeNext"
+    "experimentalDecorators": true, // Add this
+    "emitDecoratorMetadata": true, // Add this
+    "target": "es2017",
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
+}

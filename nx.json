@@ -39,7 +39,8 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      }
+      },
+      "exclude": ["backend-e2e/**/*", "apps/backend-e2e/**/*"]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -51,6 +52,14 @@
       "plugin": "@nx/rollup/plugin",
       "options": {
         "buildTargetName": "build"
+      }
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
       }
     }
   ],
@@ -75,6 +84,10 @@
     "react-shared-components": {
       "root": "packages/react-shared-components",
       "tsConfig": "packages/react-shared-components/tsconfig.json"
+    },
+    "nestjs-lib": {
+      "root": "packages/nestjs-lib",
+      "tsConfig": "packages/nestjs-lib/tsconfig.lib.json"
     }
   },
   "workspaceLayout": {
@@ -87,7 +100,8 @@
       "options": {
         "lintFilePatterns": [
           "apps/frontend/**/*.ts",
-          "library/react-shared-components/**/*.ts"
+          "packages/react-shared-components/**/*.ts",
+          "packages/nestjs-lib/**/*.ts"
         ]
       }
     }
@@ -102,5 +116,4 @@
   "sync": {
     "disabledTaskSyncGenerators": ["@nx/js:typescript-sync"]
   }
-  
 }
