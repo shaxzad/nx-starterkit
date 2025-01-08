@@ -16,16 +16,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'npm'
 
+      - run: git fetch origin main
+
       - run: npm ci
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: |
-          unset NX_BASE
-          unset NX_HEAD
-          npx nx affected -t lint build --skip-nx-cache
+      - run: npx nx affected -t lint build --base=origin/main --head=HEAD --skip-nx-cache
