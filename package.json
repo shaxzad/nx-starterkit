@@ -8,7 +8,12 @@
     "backend": "nx serve backend",
     "build": "nx affected -t build",
     "lint": "nx affected -t build",
-    "test": "nx test frontend"
+    "test": "nx test frontend",
+    "prisma-generate": "npx prisma generate --schema=packages/nestjs-lib/src/database/schema.prisma",
+    "prisma-migrate": "npx prisma migrate dev --schema=packages/nestjs-lib/src/database/schema.prisma",
+    "prisma-studio": "npx prisma studio --schema=packages/nestjs-lib/src/database/schema.prisma",
+    "prisma-db-push": "npx prisma db push --schema=packages/nestjs-lib/src/database/schema.prisma",
+    "prisma-seed": "ts-node packages/nestjs-lib/src/database/seed.ts"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +27,7 @@
     "@nx-starterkit/react-shared-components": "file:../../dist/libs/react-shared-components",
     "@prisma/client": "^6.1.0",
     "axios": "^1.6.0",
+    "bcrypt": "^5.1.1",
     "next": "^14.2.23",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -51,6 +57,7 @@
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
     "@testing-library/react": "15.0.6",
+    "@types/bcrypt": "^5.0.2",
     "@types/jest": "^29.5.12",
     "@types/multer": "^1.4.12",
     "@types/node": "18.16.9",
