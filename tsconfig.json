@@ -5,5 +5,10 @@
       "@app/*": ["apps/*"],
       "@packages/*": ["packages/*"]
     }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }

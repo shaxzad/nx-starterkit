@@ -49,3 +49,5 @@ out
 test-output
 
 pnpm-lock.yaml
+
+storybook-static
