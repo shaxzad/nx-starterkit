@@ -6,7 +6,9 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "storybook": "storybook dev",
+    "build-storybook": "storybook build"
   },
   "keywords": [
     "react",
