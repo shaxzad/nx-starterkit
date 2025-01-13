@@ -2,14 +2,24 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthService } from '@helpers/auth.service';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly authService: AuthService,
+  ) {}
 
   async createUser(createUserDto: CreateUserDto) {
+    const hashedPassword = this.authService.hashPassword(createUserDto.password);
+
     return this.prisma.user.create({
-      data: createUserDto,
+      data: {
+
+        ...createUserDto,
+        password: hashedPassword
+      },
     });
   }
 
@@ -35,6 +45,10 @@ export class UserService {
   }
 
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
+    if (updateUserDto.password) {
+      updateUserDto.password = this.authService.hashPassword(updateUserDto.password);
+    }
+
     return this.prisma.user.update({
       where: { id: parseInt(id) },
       data: updateUserDto,
@@ -45,5 +59,22 @@ export class UserService {
     return this.prisma.user.delete({
       where: { id: parseInt(id) },
     });
+  }
+
+  async findByEmail(email: string) {
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
+  }
+
+  async validateUser(email: string, password: string) {
+    const user = await this.findByEmail(email);
+
+    if (user && this.authService.comparePassword(password, user.password)) {
+      const { password, ...result } = user;
+      return result;
+    }
+
+    return null;
   }
 }
