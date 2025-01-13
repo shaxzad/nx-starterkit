@@ -3,13 +3,9 @@
     "compilerOptions": {
       "rootDir": "../../",
       "baseUrl": ".",
-      "paths": {
-        "@helpers/*": ["../../helpers/src/*"]
-      }
     },
     "files": [],
     "include": [
-      "src/**/*",
-      "../../helpers/src/**/*"
+      "src/**/*"
     ]  
 }

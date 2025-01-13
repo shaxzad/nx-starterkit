@@ -99,12 +99,7 @@
     },
     "nestjs-lib": {
       "root": "packages/nestjs-lib",
-      "tsConfig": "packages/nestjs-lib/tsconfig.lib.json",
-      "implicitDependencies": ["helpers"]
-    },
-    "helpers": {
-      "root": "packages/helpers",
-      "tsConfig": "packages/helpers/tsconfig.lib.json"
+      "tsConfig": "packages/nestjs-lib/tsconfig.lib.json"
     }
   },
   "workspaceLayout": {

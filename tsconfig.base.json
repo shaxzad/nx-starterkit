@@ -25,7 +25,6 @@
       "@nx-starterkit/react-shared-components": [
         "packages/react-shared-components/src/index.ts"
       ],
-      "@helpers/*": ["packages/helpers/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
