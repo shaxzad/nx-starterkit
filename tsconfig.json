@@ -2,9 +2,14 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "paths": {
-      "@app/*": ["apps/*"],
-      "@packages/*": ["packages/*"]
-    }
+      "@app/*": [
+        "apps/*"
+      ],
+      "@packages/*": [
+        "packages/*"
+      ],
+    },
+    "baseUrl": "./"
   },
   "ts-node": {
     "compilerOptions": {

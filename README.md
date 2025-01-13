@@ -32,6 +32,13 @@ nx build react-shared-components
 nx build nestjs-lib
 ```
 
+## Swagger
+
+### users API
+
+```sh
+ http://localhost:3000/api/docs/users
+```
 
 ```
 npx nx release
