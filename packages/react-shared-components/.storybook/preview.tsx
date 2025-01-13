@@ -1,22 +1,20 @@
 import type { Preview } from '@storybook/react';
-import { themes } from '@storybook/theming'; // Optional: For customizing Storybook's theme
-import React from 'react'; // Add this import for JSX support
+import { themes } from '@storybook/theming';
+import React from 'react';
+import '../tailwind.css';
 
 const preview: Preview = {
   parameters: {
-    // Optional: Configure Storybook's appearance
     docs: {
-      theme: themes.dark, // Use a dark theme for the docs (or themes.light for light theme)
+      theme: themes.dark,
     },
-    // Optional: Configure backgrounds for your stories
     backgrounds: {
-      default: 'light', // Default background
+      default: 'light',
       values: [
-        { name: 'light', value: '#ffffff' }, // Light background
-        { name: 'dark', value: '#333333' }, // Dark background
+        { name: 'light', value: '#ffffff' },
+        { name: 'dark', value: '#333333' },
       ],
     },
-    // Optional: Configure viewports for responsive testing
     viewport: {
       viewports: {
         mobile: {
@@ -42,9 +40,7 @@ const preview: Preview = {
         },
       },
     },
-    // Optional: Configure actions (e.g., onClick handlers)
     actions: { argTypesRegex: '^on[A-Z].*' },
-    // Optional: Configure controls for props
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -52,7 +48,6 @@ const preview: Preview = {
       },
     },
   },
-  // Optional: Global decorators (e.g., wrapping all stories in a provider)
   decorators: [
     (Story) => (
       <div style={{ margin: '20px' }}>
