@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { AuthService } from '../auth/auth.service';
-import { ConfigModule } from '@nestjs/config'; 
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [forwardRef(() => AuthModule)], // Use forwardRef to handle circular dependency
+  providers: [UserService],
   controllers: [UserController],
-  providers: [UserService, AuthService],
+  exports: [UserService], // Export UserService
 })
 export class UserModule {}

@@ -1,46 +1,81 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { sign, verify } from 'jsonwebtoken';
-import { hashSync, compareSync } from 'bcrypt';
-import * as crypto from 'crypto';
+import { UserService } from '../user/user.service';
+import { hash, compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+    private readonly userService: UserService,
+  ) {}
 
-  hashPassword(password: string): string {
-    return hashSync(password, 10);
+  async hashPassword(password: string): Promise<string> {
+    return await hash(password, 10);
   }
 
-  comparePassword(password: string, hash: string): boolean {
-    return compareSync(password, hash);
+  async comparePassword(password: string, hash: string): Promise<boolean> {
+    return await compare(password, hash);
   }
 
-  signJWT(payload: object): string {
-    return sign(payload, this.configService.get<string>('JWT_SECRET'), {
-      expiresIn: '1h', // Set token expiration
+  async validateUser(username: string, password: string): Promise<any> {
+    const user = await this.userService.findByUsername(username);
+    if (user && (await this.comparePassword(password, user.password))) {
+      return user;
+    }
+    return null;
+  }
+
+  async login(user: any): Promise<{ accessToken: string }> {
+    const payload = { username: user.username, sub: user.id };
+    return {
+      accessToken: this.jwtService.sign(payload),
+    };
+  }
+
+  async verifyToken(token: string): Promise<any> {
+    return this.jwtService.verify(token, {
+      secret: this.configService.get<string>('JWT_SECRET'),
     });
   }
 
-  verifyJWT(token: string): any {
-    return verify(token, this.configService.get<string>('JWT_SECRET'));
+  async verifyJWT(token: string): Promise<any> {
+    try {
+      return this.jwtService.verifyAsync(token, {
+        secret: this.configService.get<string>('JWT_SECRET'),
+      });
+    } catch (error) {
+      throw new Error('Token verification failed');
+    }
   }
 
-  encrypt(value: string): string {
-    const algorithm = 'aes-256-cbc';
-    const key = this.configService.get<string>('ENCRYPTION_KEY');
-    const cipher = crypto.createCipher(algorithm, key);
-    let encrypted = cipher.update(value, 'utf8', 'hex');
-    encrypted += cipher.final('hex');
-    return encrypted;
+  // Sign a JWT token
+  signJWT(payload: object): string {
+    const secret = this.configService.get<string>('JWT_SECRET');
+    if (!secret) {
+      throw new Error('JWT_SECRET is not defined in the environment variables');
+    }
+    return sign(payload, secret, { expiresIn: '1h' }); // Token valid for 1 hour
   }
 
-  decrypt(hash: string): string {
-    const algorithm = 'aes-256-cbc';
-    const key = this.configService.get<string>('ENCRYPTION_KEY');
-    const decipher = crypto.createDecipher(algorithm, key);
-    let decrypted = decipher.update(hash, 'hex', 'utf8');
-    decrypted += decipher.final('utf8');
-    return decrypted;
+  async findByUsername(username: string): Promise<any> {
+    return this.userService.getUsers().then(users =>
+      users.find((user) => user.username === username),
+    );
+  }
+
+  async findByUsernameOrEmail(identifier: string): Promise<any> {
+    console.log('Finding user by username or email:', identifier);
+    try {
+      const user = await this.userService.findByUsernameOrEmail(identifier);
+      console.log('User found:', user);
+      return user;
+    } catch (error) {
+      console.error('Error finding user:', error);
+      throw error;
+    }
   }
 }
