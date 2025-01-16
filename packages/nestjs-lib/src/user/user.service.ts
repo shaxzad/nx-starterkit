@@ -83,7 +83,7 @@ export class UserService {
 
   async findByUsername(username: string): Promise<any> {
     return this.prisma.user.findUnique({
-      where: { id: 0, email: '', username: { equals: username } },
+      where: { id: 0, email: '', username },
     });
   }
 

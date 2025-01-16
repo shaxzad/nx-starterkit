@@ -14,7 +14,7 @@ import * as Joi from 'joi';
         PORT: Joi.number().default(3000),
       }),
     }),
-    // AuthModule,
+    AuthModule,
     UserModule, 
     DatabaseModule,
   ]

@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { AuthController } from './auth.controller';
 import { UserModule } from '../user/user.module';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { UserModule } from '../user/user.module';
         signOptions: { expiresIn: '1h' },
       }),
     }),
-    forwardRef(() => UserModule), // Use forwardRef to handle circular dependency
+    forwardRef(() => UserModule),
+    forwardRef(() => DatabaseModule),
   ],
   providers: [AuthService, JwtAuthGuard],
   controllers: [AuthController],
