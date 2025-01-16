@@ -6,3 +6,10 @@ export const userApiConfig = new DocumentBuilder()
   .setVersion('1.0')
   .addTag('users')
   .build();
+
+export const authApiConfig = new DocumentBuilder()
+  .setTitle('Auth API')
+  .setDescription('The Auth API description')
+  .setVersion('1.0')
+  .addTag('auth')
+  .build();

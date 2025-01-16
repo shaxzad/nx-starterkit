@@ -1,3 +1,3 @@
-export * from './database/database.module';
+export * from './auth/auth.module';
 export * from './user/user.module';
-export * from './test/nestjs-lib.module';
+export * from './database/database.module';

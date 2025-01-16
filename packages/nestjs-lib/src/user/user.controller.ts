@@ -6,7 +6,6 @@ import {
   Param,
   Put,
   Delete,
-  Query,
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
@@ -15,15 +14,16 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserParamsDto } from './dto/user-params.dto';
 import {
+  ApiTags,
   ApiOperation,
   ApiResponse,
-  ApiTags,
   ApiParam,
   ApiBody,
-  ApiQuery,
+  ApiBadRequestResponse,
+  ApiNotFoundResponse,
 } from '@nestjs/swagger';
 
-@ApiTags('users')
+@ApiTags('users') // Group endpoints under the 'users' tag
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -31,7 +31,7 @@ export class UserController {
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiResponse({ status: 201, description: 'User created successfully' })
-  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiBadRequestResponse({ description: 'Bad request' })
   @ApiBody({ type: CreateUserDto })
   async createUser(@Body() createUserDto: CreateUserDto) {
     try {
@@ -44,7 +44,7 @@ export class UserController {
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'List of users' })
-  @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiNotFoundResponse({ description: 'No users found' })
   async getUsers() {
     try {
       return await this.userService.getUsers();
@@ -56,7 +56,7 @@ export class UserController {
   @Get(':id')
   @ApiOperation({ summary: 'Get a user by ID' })
   @ApiResponse({ status: 200, description: 'User found' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiNotFoundResponse({ description: 'User not found' })
   @ApiParam({ name: 'id', type: String, description: 'User ID' })
   async getUser(@Param('id') id: string) {
     try {
@@ -69,7 +69,7 @@ export class UserController {
   @Put(':id')
   @ApiOperation({ summary: 'Update a user by ID' })
   @ApiResponse({ status: 200, description: 'User updated successfully' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiNotFoundResponse({ description: 'User not found' })
   @ApiParam({ name: 'id', type: String, description: 'User ID' })
   @ApiBody({ type: UpdateUserDto })
   async updateUser(
@@ -86,7 +86,7 @@ export class UserController {
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a user by ID' })
   @ApiResponse({ status: 200, description: 'User deleted successfully' })
-  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiNotFoundResponse({ description: 'User not found' })
   @ApiParam({ name: 'id', type: String, description: 'User ID' })
   async deleteUser(@Param() params: UserParamsDto) {
     try {

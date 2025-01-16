@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, forwardRef } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -6,17 +6,20 @@ import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UserService {
+  findOne(arg0: { where: ({ username: string; } | { email: string; })[]; }) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private readonly prisma: PrismaService,
+    @Inject(forwardRef(() => AuthService))
     private readonly authService: AuthService,
   ) {}
 
   async createUser(createUserDto: CreateUserDto) {
-    const hashedPassword = this.authService.hashPassword(createUserDto.password);
+    const hashedPassword = await this.authService.hashPassword(createUserDto.password);
 
     return this.prisma.user.create({
       data: {
-
         ...createUserDto,
         password: hashedPassword
       },
@@ -46,7 +49,7 @@ export class UserService {
 
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
     if (updateUserDto.password) {
-      updateUserDto.password = this.authService.hashPassword(updateUserDto.password);
+      updateUserDto.password = await this.authService.hashPassword(updateUserDto.password);
     }
 
     return this.prisma.user.update({
@@ -76,5 +79,22 @@ export class UserService {
     }
 
     return null;
+  }
+
+  async findByUsername(username: string): Promise<any> {
+    return this.prisma.user.findUnique({
+      where: { id: 0, email: '', username },
+    });
+  }
+
+  async findByUsernameOrEmail(identifier: string): Promise<any> {
+    return this.prisma.user.findFirst({
+      where: {
+        OR: [
+          { username: identifier },
+          { email: identifier },
+        ],
+      },
+    });
   }
 }
