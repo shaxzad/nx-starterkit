@@ -8,7 +8,7 @@ export default function Index() {
    */
   return (
     <div className="flex justify-center py-10">
-      <Button variant="primaryOutline-400" size="lg">
+      <Button variant="primary400" size="sm">
         Primary Outline 400
       </Button>
     </div>
