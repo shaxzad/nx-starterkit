@@ -16,7 +16,11 @@
         "tsConfig": "packages/nestjs-lib/tsconfig.lib.json",
         "packageJson": "packages/nestjs-lib/package.json",
         "main": "packages/nestjs-lib/src/index.ts",
-        "assets": ["packages/nestjs-lib/*.md"],
+        "assets": [
+          "packages/nestjs-lib/.md",
+          "packages/nestjs-lib/package.json",
+          "packages/nestjs-lib/src/**/*"
+        ],
         "updateBuildableProjectDepsInPackageJson": true
       }
     }
