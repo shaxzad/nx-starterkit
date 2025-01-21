@@ -1,27 +1,40 @@
-import { Inject, Injectable, NotFoundException, forwardRef } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthService } from '../auth/auth.service';
+import * as bcrypt from 'bcrypt';
+import { validate } from 'class-validator';
 
 @Injectable()
 export class UserService {
-  findOne(arg0: { where: ({ username: string; } | { email: string; })[]; }) {
+  createUser(createUserDto: CreateUserDto) {
     throw new Error('Method not implemented.');
   }
-  constructor(
-    private readonly prisma: PrismaService,
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  async createUser(createUserDto: CreateUserDto) {
-    const hashedPassword = await this.authService.hashPassword(createUserDto.password);
+  async create(createUserDto: CreateUserDto) {
+    // Ensure that the branchId is provided in the DTO
+    if (!createUserDto.branchId) {
+      throw new Error('branchId is required');
+    }
 
     return this.prisma.user.create({
       data: {
-        ...createUserDto,
-        password: hashedPassword
+        username: createUserDto.username,
+        email: createUserDto.email,
+        firstName: createUserDto.firstName,
+        lastName: createUserDto.lastName,
+        password: createUserDto.password,
+        tenant: {
+          connect: { id: createUserDto.tenantId },
+        },
+        branch: {
+          connect: { id: createUserDto.branchId },
+        },
       },
     });
   }
@@ -30,70 +43,41 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
-  async getUser(id: string) {
-    const userId = parseInt(id, 10);
-    if (isNaN(userId)) {
-      throw new NotFoundException(`Invalid user ID: ${id}`);
-    }
-
+  async getUserById(userId: string) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
     });
 
     if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      throw new NotFoundException('User not found');
     }
 
     return user;
   }
 
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
-    if (updateUserDto.password) {
-      updateUserDto.password = await this.authService.hashPassword(updateUserDto.password);
-    }
-
     return this.prisma.user.update({
-      where: { id: parseInt(id) },
+      where: { id },
       data: updateUserDto,
     });
   }
 
   async deleteUser(id: string) {
     return this.prisma.user.delete({
-      where: { id: parseInt(id) },
+      where: { id },
     });
   }
 
-  async findByEmail(email: string) {
+  async findByUsername(username: string) {
     return this.prisma.user.findUnique({
-      where: { email },
+      where: { username },
     });
   }
 
-  async validateUser(email: string, password: string) {
-    const user = await this.findByEmail(email);
-
-    if (user && this.authService.comparePassword(password, user.password)) {
-      const { password, ...result } = user;
-      return result;
-    }
-
-    return null;
-  }
-
-  async findByUsername(username: string): Promise<any> {
-    return this.prisma.user.findUnique({
-      where: { id: 0, email: '', username },
-    });
-  }
-
-  async findByUsernameOrEmail(identifier: string): Promise<any> {
+  async findByUsernameOrEmail(identifier: string) {
     return this.prisma.user.findFirst({
       where: {
-        OR: [
-          { username: identifier },
-          { email: identifier },
-        ],
+        OR: [{ username: identifier }, { email: identifier }],
       },
     });
   }

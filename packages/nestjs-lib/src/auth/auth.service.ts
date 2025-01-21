@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { UserService } from '../user/user.service';
 import { hash, compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
+import { PrismaService } from '../database/prisma.service';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly userService: UserService,
+    private readonly prisma: PrismaService
   ) {}
 
   async hashPassword(password: string): Promise<string> {
@@ -62,9 +64,9 @@ export class AuthService {
   }
 
   async findByUsername(username: string): Promise<any> {
-    return this.userService.getUsers().then(users =>
-      users.find((user) => user.username === username),
-    );
+    return this.userService
+      .getUsers()
+      .then((users) => users.find((user) => user.email === username));
   }
 
   async findByUsernameOrEmail(identifier: string): Promise<any> {
@@ -77,5 +79,20 @@ export class AuthService {
       console.error('Error finding user:', error);
       throw error;
     }
+  }
+
+  async getUserBranchRoles(
+    userId: string
+  ): Promise<{ branchId: string; role: string }[]> {
+    console.log('Getting user branch roles for user auth page:', userId);
+    const userBranchRoles = await this.prisma.userBranchRole.findMany({
+      where: { userId },
+      select: { branchId: true, role: { select: { name: true } } },
+    });
+
+    return userBranchRoles.map((item) => ({
+      branchId: item.branchId,
+      role: item.role.name,
+    }));
   }
 }

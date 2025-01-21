@@ -6,6 +6,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { AuthController } from './auth.controller';
 import { UserModule } from '../user/user.module';
 import { DatabaseModule } from '../database/database.module';
+import { PrismaService } from '../database/prisma.service';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { DatabaseModule } from '../database/database.module';
     forwardRef(() => UserModule),
     forwardRef(() => DatabaseModule),
   ],
-  providers: [AuthService, JwtAuthGuard],
+  providers: [AuthService, JwtAuthGuard, PrismaService],
   controllers: [AuthController],
   exports: [AuthService, JwtAuthGuard],
 })
